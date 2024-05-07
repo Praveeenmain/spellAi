@@ -70,7 +70,7 @@ const Login = ({ history }) => {
   return (
     <div className="login-form-container">
       <form onSubmit={submitForm}>
-        <h2 className='login-heading'>Login</h2>
+        <h2 className='login-heading'>Spell Ai</h2>
         <div className="form-login-group">
           <label htmlFor="email">Email:</label>
           <input

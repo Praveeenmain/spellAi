@@ -5,6 +5,7 @@ import Home from './components/Home'
 import Login from './components/Login/login'
 import ProtectedRoute from './components/ProtectedRoute'
 import PrivateRoute from './components/PrivateRoute/private'
+
 const App = () => {
 
 
@@ -12,9 +13,11 @@ const App = () => {
     <>
     <Switch>
       <PrivateRoute exact path="/signup" component={Signup} />
+    
       <PrivateRoute exact path="/login" component={Login} />
-     
       <ProtectedRoute exact path="/" component={Home } />
+      
+     
       
        
     </Switch>

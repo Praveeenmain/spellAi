@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Signup.css'; // Importing CSS file
-
+import { useHistory } from 'react-router-dom'; 
 function Signup() {
+  const history = useHistory();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,6 +34,7 @@ function Signup() {
       });
 
       setResponseMessage('Signup successful!');
+      history.push('/login');
     } catch (error) {
       console.error('Error:', error);
       setResponseMessage('Signup failed. Please try again.');
@@ -43,7 +45,7 @@ function Signup() {
 
   return (
     <div className="signup-container">
-      <h2 className="signup-heading">Sign Up</h2>
+      <h2 className="signup-heading">Spell Ai</h2>
       <form onSubmit={handleSubmit} className="signup-form">
         <div className="form-group">
           <label htmlFor="name" className="form-label">Name</label>
