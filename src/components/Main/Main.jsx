@@ -54,7 +54,7 @@ const Main = () => {
         ) : (
           <>
             <div className="greet">
-              <p><span>Hello, Praveen</span></p>
+              <p><span>Hello, User</span></p>
               <p>I may give whatever you want....</p>
             </div>
             <div className="cards">
