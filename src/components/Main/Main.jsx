@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
 import './Main.css';
 import { assets } from '../../assets/assets';
 import { Context } from '../../context/Context';
@@ -12,52 +12,17 @@ const apiStatusConstants = {
 };
 
 const Main = () => {
-  const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial);
-  const [userData, setUserData] = useState({});
+  const [input, setInput] = useState('');
   const {
     onSent,
     recentPrompt,
     showResult,
     loading,
     resultData,
-    setInput,
-    input,
   } = useContext(Context);
-
-  useEffect(() => {
-    fetchUserProfile();
-  }, []);
 
   const handleCardClick = (text) => {
     setInput(text);
-  };
-
-  const fetchUserProfile = async () => {
-    try {
-      setApiStatus(apiStatusConstants.inProgress); // Set API status to inProgress
-      const jwtToken = Cookies.get('jwt_token');
-      const apiUrl = 'https://jmbackend.onrender.com/profile/';
-      const options = {
-        headers: {
-          Authorization: `Bearer ${jwtToken}`,
-        },
-        method: 'GET',
-      };
-
-      const response = await fetch(apiUrl, options);
-      const data = await response.json();
-
-      if (response.ok) {
-        setUserData(data);
-       
-        setApiStatus(apiStatusConstants.success);
-      } else {
-        setApiStatus(apiStatusConstants.failure);
-      }
-    } catch (error) {
-      console.error('Error fetching profile:', error);
-      setApiStatus(apiStatusConstants.failure);
-    }
   };
 
   return (
@@ -88,12 +53,10 @@ const Main = () => {
           </div>
         ) : (
           <>
-            {userData && (
-              <div className="greet">
-                <p><span>Hello, {userData.name}</span></p>
-                <p>I may give whatever you want....</p>
-              </div>
-            )}
+            <div className="greet">
+              <p><span>Hello, Praveen</span></p>
+              <p>I may give whatever you want....</p>
+            </div>
             <div className="cards">
               <div className="card" onClick={() => handleCardClick('Suggest beautiful places to see on an upcoming road trip')}>
                 <p>Suggest beautiful places to see on an upcoming road trip</p>
@@ -124,7 +87,7 @@ const Main = () => {
             <div>
               <img src={assets.gallery_icon} width={30} alt="" />
               <img src={assets.mic_icon} width={30} alt="" />
-              {input ? <img onClick={() => onSent()}  src={assets.send_icon} width={30} alt="" /> : null}
+              {input ? <img onClick={() => onSent(input)} src={assets.send_icon} width={30} alt="" /> : null}
             </div>
           </div>
           <p className="bottom-info">

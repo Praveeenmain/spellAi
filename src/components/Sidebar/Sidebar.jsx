@@ -1,25 +1,23 @@
-import React, { useContext, useState } from 'react'
-import './Sidebar.css'
-import { assets } from '../../assets/assets'
+import React, { useContext, useState } from 'react';
+import './Sidebar.css';
+import { assets } from '../../assets/assets';
 import { Context } from '../../context/Context';
-import Cookies from "js-cookie";
-import { useHistory } from 'react-router-dom';
+
+
+
 
 const Sidebar = () => {
-    const history = useHistory(); // Initialize useHistory hook
+   
 
     const [extended, setExtended] = useState(false);
-    const { onSent, prevPrompts, setRecentPrompt, newChat, logout } = useContext(Context);
+    const { onSent, prevPrompts, setRecentPrompt, newChat } = useContext(Context);
 
     const loadPrompt = async (prompt) => {
         await onSent(prompt);
         setRecentPrompt(prompt);
     }
 
-    const handleLogout = () => {
-        Cookies.remove('jwt_token');
-        history.push('/login'); // Use history.push to navigate to '/login'
-    }
+  
 
     return (
         <div className='sidebar'>
@@ -42,13 +40,7 @@ const Sidebar = () => {
                     : null}
             </div>
             <div className="bottom">
-                <div className="bottom-item recent-entry" onClick={handleLogout}>
-                    <button>
-                        <img src="https://c0.klipartz.com/pngpicture/535/761/gratis-png-abmeldung-iconos-de-la-computadora-cierre-de-sesion-thumbnail.png" alt="" />
-                    </button>
-                    {extended ? <p>Logout</p> : null}
-                  
-                </div>
+               
                 <div className="bottom-item recent-entry">
                     <img src={assets.history_icon} alt="" />
                     {extended ? <p>Activity</p> : null}
